@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.bc"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 去除空格 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
+        <property name="converters">    
+            <list>    
+                <bean class="com.bc.common.utils.StringConverter" />
+                <bean class="com.bc.common.utils.DateConverter" />        
+            </list>    
+        </property>    
+    </bean> 
+    
+	<mvc:annotation-driven conversion-service="conversionService"/> 
+	<!-- 支持以斜杠结尾的url begin -->
+	<mvc:default-servlet-handler/>
+	<!-- 支持以斜杠结尾的url end -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+    <!-- 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="10000000"></property>
+	</bean>
+	 -->
+	<!-- 全局异常配置 start -->    
+	<!-- 
+	<bean id="exceptionResolver" class="cn.blending.common.exceptions.CustomExceptionResolver">
+		<property name="warnLogCategory" value="WARN"></property>   
+		<property name="defaultErrorView" value="default/error/other" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="cn.blending.common.exceptions.BusinessException">default/error/businessErr</prop>
+			</props>
+		</property>
+	</bean>
+      -->
+	<!-- 资源文件绑定器 -->
+	<!--  
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/i18n/common/Msg</value>
+				<value>/i18n/sys/Msg</value>
+				<value>/i18n/cc/Msg</value>
+				<value>/i18n/km/Msg</value>
+				<value>/i18n/tm/Msg</value>
+				<value>/i18n/mm/Msg</value>
+				<value>/i18n/exception/Cc_Exception</value>
+			</list>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+    
+	<mvc:view-controller path="/" view-name="redirect:/in/mgr" />
+	-->
+</beans>

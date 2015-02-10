@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <classPathEntry location="D:\ojdbc14.jar" />
+  <context id="context1" >
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.0.176:1521:orcl" userId="bcsp" password="bcsp" />
+    <javaModelGenerator targetPackage="com.bc.db.bean" targetProject="BCSP/src" />
+    <sqlMapGenerator targetPackage="mybatis.sqlMap.bc" targetProject="BCSP/config" />
+    <!-- 
+    <javaClientGenerator targetPackage="com.bc.db.bean" targetProject="BCSP" type="XMLMAPPER" />
+     -->
+
+<!-- 
+  <table tableName="T_TRADE_MAIN" domainObjectName="TradeMain"
+    enableInsert="true" enableSelectByPrimaryKey="true"
+    enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true"
+    enableCountByExample="false" enableUpdateByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    selectByExampleQueryId="false">
+    <generatedKey column="ID" sqlStatement="select SEQ_TRADE_MAIN.nextval from dual" type="pre" ></generatedKey>
+  </table>
+ -->
+ 
+  </context>
+</generatorConfiguration>
